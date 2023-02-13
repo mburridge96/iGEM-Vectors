@@ -10,9 +10,10 @@ runs:
   steps:
       # Set python3.9 up for latest compatability
       - name: "Set up Python"
-        uses: "actions/setup-python@v2"
+        uses: "actions/setup-python@v4"
         with:
           python-version: 3.9
+          cache: 'pip' 
 
       # Check out and install the latest sbol-utilities package
       - name: "Check out experimental package code for SBOL utilities"
