@@ -13,23 +13,5 @@ jobs:
       - name: Check out this repository for building
         uses: actions/checkout@v3
 
-      # All of this below here should be packaged up into a single importable action
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-
-      - name: Check out experimental package code for SBOL utilities
-        uses: actions/checkout@v3
-        with:
-          repository: SynBioDex/sbol-utilities
-          ref: sep054
-          path: sbol-utilities
-
-      # Note kludge for local install during experimentation:
-      - name: Install SBOL utilities
-        run: |
-          pip install -e sbol-utilities
-
-      - name: Test if we can export correctly
-        run: excel-to-sbol -c .github/workflows/sheet_config.json Vectors.xlsx
+      - name: Make sbol file from xlsx
+        uses: ./.github/actions/make-sbol
