@@ -22,10 +22,10 @@ runs:
         with:
           python-version: 3.9
 
-      - name: "Install SBOL utilities"
+      - name: "Install SBOL utilities"  
         shell: "bash"
         run: "pip install -e sbol-utilities"
 
       - name: "Test if we can export correctly"
         shell: "bash"
-        run: "excel-to-sbol -c workflows/sheet_config.json Vectors.xlsx"
+        run: "excel-to-sbol -c ./.github/workflows/sheet_config.json Vectors.xlsx"
