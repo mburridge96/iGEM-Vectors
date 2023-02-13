@@ -13,7 +13,6 @@ runs:
         uses: "actions/setup-python@v4"
         with:
           python-version: 3.9
-          cache: 'pip' 
 
       # Check out and install the latest sbol-utilities package
       - name: "Check out experimental package code for SBOL utilities"
