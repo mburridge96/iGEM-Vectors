@@ -21,8 +21,14 @@ runs:
         uses: "actions/setup-python@v4"
         with:
           python-version: 3.9
-          cache: "pip"
-        run: "pip install -e sbol-utilities"          
+
+
+
+      - name: "Install SBOL utilities"
+        shell: "bash"
+        run: |
+          "python3 -m pip install --upgrade pip"
+          "pip install -e sbol-utilities"
 
       - name: "Test if we can export correctly"
         shell: "bash"
