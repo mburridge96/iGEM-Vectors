@@ -23,8 +23,10 @@ runs:
           path: "sbol-utilities"
 
       - name: "Install SBOL utilities"
+        shell: "bash"
         run: |
           "pip install -e sbol-utilities"
 
       - name: "Test if we can export correctly"
+        shell: "bash"
         run: "excel-to-sbol -c workflows/sheet_config.json Vectors.xlsx"
