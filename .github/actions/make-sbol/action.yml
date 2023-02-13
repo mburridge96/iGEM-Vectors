@@ -8,12 +8,6 @@ description:  "Installs the required dependencies, python3.9 and sbol-utilities,
 runs: 
   using: "composite"
   steps:
-      # Set python3.9 up for latest compatability
-      - name: "Set up Python"
-        uses: "actions/setup-python@v4"
-        with:
-          python-version: 3.9
-
       # Check out and install the latest sbol-utilities package
       - name: "Check out experimental package code for SBOL utilities"
         uses: "actions/checkout@v3"
@@ -22,10 +16,13 @@ runs:
           ref: "sep054"
           path: "sbol-utilities"
 
-      - name: "Install SBOL utilities"
-        shell: "bash"
-        run: |
-          "pip3 install -e sbol-utilities"
+      # Set python3.9 up for latest compatability
+      - name: "Set up Python"
+        uses: "actions/setup-python@v4"
+        with:
+          python-version: 3.9
+          cache: "pip"
+        run: "pip install -e sbol-utilities"          
 
       - name: "Test if we can export correctly"
         shell: "bash"
