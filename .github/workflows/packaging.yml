@@ -15,3 +15,17 @@ jobs:
 
       - name: Make sbol file from xlsx
         uses: ./.github/actions/make-sbol
+        
+  directories_and_excel:
+    name: Check package structure and export from Excel files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out this repository for building
+        uses: actions/checkout@v3
+      - name: directories_and_excel
+        uses: ./.github/actions/directories_and_excel
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
