@@ -40,16 +40,20 @@ def export_csvs(package: str):
 
     Parameters
     ----------
-    package: directory for Excel file
+    package: Absolute path Excel file package
     """
+    # Set current directory and name
+    package_directory = os.path.dirname(package)
+    package_name = os.path.basename(package)
+
     # Get the package excel file
-    excel_file = package_excel(package)
+    package_excel(package_directory)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", category=UserWarning)  # filter the "data validation not supported" warning
-        wb = openpyxl.open(excel_file, data_only=True)
+        wb = openpyxl.open(package, data_only=True)
 
     # Target directory name:
-    target_directory = os.path.join(package, EXPORT_DIRECTORY)
+    target_directory = os.path.join(package_directory, EXPORT_DIRECTORY)
 
     # Clear out any old CSV exports
     for old_csv in glob.glob(os.path.join(target_directory, '*.csv')):

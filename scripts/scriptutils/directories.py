@@ -56,7 +56,7 @@ def package_excel(directory) -> str:
     elif len(excel_files) > 1:
         raise ValueError(f' Found multiple Excel files in package: {excel_files}')
     else:
-        return os.path.join(directory, excel_files[0])
+        print(f"Success: found one excel file: {excel_files}")
 
 
 def regularize_directory(dir: str):
