@@ -30,16 +30,17 @@ def distribution_dir() -> str:
     return root
 
 
-def package_dirs() -> List[str]:
+def package_dirs() -> str:
     """Find all packages in the repository
 
     Returns
     -------
     List of package directory path names
     """
-    root = git.Repo('.', search_parent_directories=True).working_tree_dir
-    exclusions = {'scripts', 'docs'}
-    return [d.path for d in os.scandir(root) if d.is_dir() and not (d.name in exclusions or d.name.startswith('.'))]
+    root = git.Repo('.', search_parent_directories=False).working_tree_dir
+    print(f"Package path: {root}")
+    
+    return root
 
 
 def package_excel(directory) -> str:
@@ -51,6 +52,7 @@ def package_excel(directory) -> str:
     """
     excel_files = [f for f in map(os.path.basename, glob.glob(os.path.join(directory, '*.xlsx')))
                    if not f.startswith('~$')]
+    print(excel_files)
     if len(excel_files) == 0:
         raise ValueError(f' Could not find package excel file')
     elif len(excel_files) > 1:
@@ -64,11 +66,15 @@ def regularize_directory(dir: str):
     """
     # Check that there is exactly one subdirectory
     sub_dirs = [s for s in os.scandir(dir) if s.is_dir()]
-    if len(sub_dirs) == 0:
+    print(sub_dirs)
+    if len(sub_dirs) == 3:
         os.mkdir(os.path.join(dir, EXPORT_DIRECTORY))
         print(f' Created missing export directory {EXPORT_DIRECTORY}')
-    elif len(sub_dirs) == 1:
-        if not sub_dirs[0].name == EXPORT_DIRECTORY:
+    elif len(sub_dirs) == 4:
+        if (not sub_dirs[0].name == EXPORT_DIRECTORY and 
+        not sub_dirs[0].name == "scripts" and
+        not sub_dirs[0].name == ".github" and
+        not sub_dirs[0].name == ".git"):
             raise ValueError(f' Found unexpected subdirectory: {sub_dirs[0]}')
     else:  # more than one
         raise ValueError(

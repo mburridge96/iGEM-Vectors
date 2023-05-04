@@ -27,12 +27,24 @@ SHEET_CONFIG = {
 }
 
 # TODO: rewrite into remappable IDs after the model of identifiers.org/pypi
-DISTRIBUTION_NAMESPACE = 'https://github.com/iGEM-Engineering/iGEM-distribution'
+DISTRIBUTION_NAMESPACE = 'https://github.com/mburridge96/iGEM-Vectors'
 
 
 def package_stem(package) -> str:
+    """Generates the uri to SBOL package namespace
+
+    Parameters
+    ----------
+    package: Absolute path to excel file path to package directory
+
+    Returns:
+    ----------
+    package_stem: string containing URI 
+    """
     local = urllib.parse.quote(os.path.basename(package), safe='')
-    return f'{DISTRIBUTION_NAMESPACE}/{local}'
+    package_stem = DISTRIBUTION_NAMESPACE + "/" + local
+    print(f"Package stem: {package_stem}")
+    return package_stem
 
 
 def export_csvs(package: str):
@@ -82,6 +94,7 @@ def export_sbol(package: str) -> sbol3.Document:
     Document that has been written
     """
     # get workbook and perform conversion
+    print(f"This is package {package}")
     excel_file = package_excel(package)
     sbol3.set_namespace(package_stem(package))  # TODO: update after resolution of https://github.com/SynBioDex/pySBOL3/issues/288 # pylint: disable=C0301 # noqa: E501
 
