@@ -90,6 +90,6 @@ def export_sbol(package: str) -> sbol3.Document:
         wb = openpyxl.open(excel_file, data_only=True)
     doc = excel_to_sbol(wb, SHEET_CONFIG)
     # write into the target directory
-    target_name = os.path.join(package, EXPORT_DIRECTORY, SBOL_EXPORT_NAME)
+    target_name = os.path.join(EXPORT_DIRECTORY, SBOL_EXPORT_NAME)
     doc.write(target_name, sbol3.SORTED_NTRIPLES)
     return doc
