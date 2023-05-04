@@ -18,13 +18,14 @@ class TestDirectoryRegularization(unittest.TestCase):
 
         # copy over package file, which should allow validation to succeed
         testdir = os.path.dirname(os.path.realpath(__file__))
-        copy(os.path.join(os.path.dirname(os.path.dirname(testdir)), 'package template.xlsx'), tmpdir)
+        test_template = os.path.join((os.path.dirname(testdir)), 'package template.xlsx')
+        copy(test_template, tmpdir)
 
         scripts.scriptutils.regularize_directory(tmpdir)
         assert os.path.isdir(os.path.join(tmpdir, scripts.scriptutils.EXPORT_DIRECTORY))
 
         # copy template again, which should cause a failure for multiple excel files
-        copy(os.path.join(os.path.dirname(os.path.dirname(testdir)), 'package template.xlsx'),
+        copy(test_template,
              os.path.join(tmpdir, 'package template2.xlsx'))
         try:
             scripts.scriptutils.regularize_directory(tmpdir)
