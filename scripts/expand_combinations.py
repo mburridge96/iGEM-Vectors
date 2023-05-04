@@ -4,16 +4,16 @@ import sys
 import scriptutils
 
 error = False
-packages = scriptutils.package_dirs()
-for p in packages:
+package = scriptutils.package_dirs()
 
-    print(f'Expanding package build plan {os.path.basename(p)}')
-    try:
-        scriptutils.expand_build_plan(p)
 
-    except (OSError, ValueError) as e:
-        print(f'Could not compute build plan for {os.path.basename(p)}: {e}')
-        error = True
+print(f'Expanding package build plan {os.path.basename(package)}')
+try:
+    scriptutils.expand_build_plan(package)
+
+except (OSError, ValueError) as e:
+    print(f'Could not compute build plan for {os.path.basename(package)}: {e}')
+    error = True
 
 # If there was an error, flag on exit in order to notify executing YAML script
 if error:
