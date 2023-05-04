@@ -35,7 +35,7 @@ def package_dirs() -> str:
 
     Returns
     -------
-    List of package directory path names
+    String defining package directory path name
     """
     root = git.Repo('.', search_parent_directories=False).working_tree_dir
     print(f"Package path: {root}")
@@ -59,6 +59,7 @@ def package_excel(directory) -> str:
         raise ValueError(f' Found multiple Excel files in package: {excel_files}')
     else:
         print(f"Success: found one excel file: {excel_files}")
+        return excel_files[0]
 
 
 def regularize_directory(dir: str):

@@ -27,7 +27,7 @@ SHEET_CONFIG = {
 }
 
 # TODO: rewrite into remappable IDs after the model of identifiers.org/pypi
-DISTRIBUTION_NAMESPACE = 'https://github.com/mburridge96/iGEM-Vectors'
+DISTRIBUTION_NAMESPACE = 'https://github.com/mburridge96'
 
 
 def package_stem(package) -> str:
@@ -42,7 +42,7 @@ def package_stem(package) -> str:
     package_stem: string containing URI 
     """
     local = urllib.parse.quote(os.path.basename(package), safe='')
-    package_stem = DISTRIBUTION_NAMESPACE + "/" + local
+    package_stem = DISTRIBUTION_NAMESPACE + "/" + local + "/tree/feature/directory_refactor"
     print(f"Package stem: {package_stem}")
     return package_stem
 
@@ -97,7 +97,7 @@ def export_sbol(package: str) -> sbol3.Document:
     print(f"This is package {package}")
     excel_file = package_excel(package)
     sbol3.set_namespace(package_stem(package))  # TODO: update after resolution of https://github.com/SynBioDex/pySBOL3/issues/288 # pylint: disable=C0301 # noqa: E501
-
+    print(excel_file)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", category=UserWarning)  # filter the "data validation not supported" warning
         wb = openpyxl.open(excel_file, data_only=True)
