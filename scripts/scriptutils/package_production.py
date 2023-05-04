@@ -178,7 +178,7 @@ def build_distribution(root: str, packages: list[str]) -> sbol3.Document:
     for package in packages:
         # get fully-assembled package document
         import_doc = sbol3.Document()
-        import_doc.read(os.path.join(package, EXPORT_DIRECTORY, SBOL_PACKAGE_NAME))
+        import_doc.read(os.path.join(EXPORT_DIRECTORY, SBOL_PACKAGE_NAME))
 
         # copy over all the objects
         print(f'  Importing {len(import_doc.objects)} objects from package {package}')
