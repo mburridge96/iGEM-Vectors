@@ -27,7 +27,7 @@ SHEET_CONFIG = {
 }
 
 # TODO: rewrite into remappable IDs after the model of identifiers.org/pypi
-DISTRIBUTION_NAMESPACE = 'https://github.com/mburridge96'
+DISTRIBUTION_NAMESPACE = 'https://github.com/iGEM-Engineering/iGEM-distribution'
 
 
 def package_stem(package) -> str:
@@ -42,7 +42,7 @@ def package_stem(package) -> str:
     package_stem: string containing URI 
     """
     local = urllib.parse.quote(os.path.basename(package), safe='')
-    package_stem = DISTRIBUTION_NAMESPACE + "/" + local + "/tree/feature/directory_refactor"
+    package_stem = DISTRIBUTION_NAMESPACE + local
     print(f"Package stem: {package_stem}")
     return package_stem
 
